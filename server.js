@@ -43,7 +43,8 @@ const iotLimit = rateLimit({
 });
 
 // Servir frontend estático
-app.use(express.static(path.join(__dirname, '../frontend')));
+const FRONTEND_DIR = path.join(process.cwd(), 'frontend');
+app.use(express.static(FRONTEND_DIR));
 
 // ─── API Routes ──────────────────────────────────────────────────────────
 
@@ -173,7 +174,7 @@ app.post('/api/config', (req, res) => {
 // ─── Fallback SPA ─────────────────────────────────────────────────────────
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(process.cwd(), 'frontend', 'index.html'));
 });
 
 // ─── Startup ──────────────────────────────────────────────────────────────
